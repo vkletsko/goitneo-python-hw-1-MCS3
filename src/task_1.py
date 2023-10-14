@@ -3,15 +3,6 @@ from collections import defaultdict
 
 birthday_dict = defaultdict(list)
 
-weekdays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-]
 
 def get_birthdays_per_week(users):
     current_date = datetime.today().date()
@@ -22,18 +13,21 @@ def get_birthdays_per_week(users):
         birthday_current_year = birthday.replace(year=current_date.year)
 
         if birthday_current_year < current_date:
-            birthday_current_year = birthday.replace(year=current_date.year + 1)
+            birthday_current_year = birthday.replace(
+                year=current_date.year + 1)
 
         delta_days = (birthday_current_year - current_date).days
 
         if delta_days < 7:
             if birthday_current_year.weekday() >= 5:
-                birthday_dict[weekdays[0]].append(name)
+                birthday_dict["Monday"].append(name)
             else:
-                birthday_dict[weekdays[birthday_current_year.weekday()]].append(name)
+                birthday_dict[birthday_current_year.strftime('%A')].append(
+                    name)
 
     for day, users_list in birthday_dict.items():
         print(f"{day}: {', '.join(users_list)}")
+
 
 users = [
     {"name": "Bill Gates", "birthday": datetime(1955, 10, 28)},
@@ -50,7 +44,7 @@ users = [
     {"name": "Yoshi", "birthday": datetime(1985, 10, 19)},
     {"name": "Toad", "birthday": datetime(1985, 10, 20)},
     {"name": "Goomba", "birthday": datetime(1985, 10, 21)},
-    {"name": "Koopa Troopa", "birthday": datetime(1985, 10, 22)} 
+    {"name": "Koopa Troopa", "birthday": datetime(1985, 10, 22)}
 ]
 
 if __name__ == "__main__":

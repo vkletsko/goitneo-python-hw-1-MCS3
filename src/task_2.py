@@ -9,7 +9,8 @@ def validate_args(cmd: str, args: list):
     else:
         is_valid = False
         err_msg = f"Please enter a correct values for command '{cmd}', allowed is 1 or 2 arguments"
-        return ([], is_valid, err_msg)       
+        return ([], is_valid, err_msg)
+
 
 def parse_input(user_input: str) -> (str, list):
     try:
@@ -19,6 +20,7 @@ def parse_input(user_input: str) -> (str, list):
     except:
         return "invalid_command", []
 
+
 def add_contact(cmd: str, contact_data: list, contacts: dict) -> str:
     (args, is_valid, err_msg) = validate_args(cmd, contact_data)
     if is_valid:
@@ -27,6 +29,7 @@ def add_contact(cmd: str, contact_data: list, contacts: dict) -> str:
     else:
         return err_msg
 
+
 def change_contact(cmd: str, contact_data: list, contacts: dict) -> str:
     (args, is_valid, err_msg) = validate_args(cmd, contact_data)
     if is_valid:
@@ -34,6 +37,7 @@ def change_contact(cmd: str, contact_data: list, contacts: dict) -> str:
         return "Contact updated"
     else:
         return err_msg
+
 
 def show_phone(cmd: str, data: list, contacts: dict) -> str:
     (args, is_valid, err_msg) = validate_args(cmd, data)
@@ -45,7 +49,7 @@ def show_phone(cmd: str, data: list, contacts: dict) -> str:
             else:
                 return f"Contact {search_name.title()} doesn't exist"
     else:
-        return err_msg      
+        return err_msg
 
 
 def show_all(contacts: dict) -> str:
